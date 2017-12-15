@@ -24,11 +24,11 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<finalName>robo-rumble</finalName>
+					<finalName>blaupause-challenge</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
-							<mainClass>de.slothsoft.roborumble.RoboRumble</mainClass>
+							<mainClass>de.slothsoft.blaupause.BlaupauseChallenge</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

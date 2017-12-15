@@ -12,7 +12,7 @@ import de.slothsoft.blaupause.gui.BlaupauseFrame;
  * @since 1.0.0
  */
 
-public class Blaupause {
+public class BlaupauseChallenge {
 
 	public static void main(String[] args) {
 		try {
