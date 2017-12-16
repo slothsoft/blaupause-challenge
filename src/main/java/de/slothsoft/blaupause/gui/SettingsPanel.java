@@ -36,14 +36,14 @@ public class SettingsPanel extends JPanel {
 	}
 
 	private void createControls() {
-		TitledBorder titleBorder = BorderFactory.createTitledBorder("Settings");
+		final TitledBorder titleBorder = BorderFactory.createTitledBorder("Settings");
 		titleBorder.setTitleColor(Color.DARK_GRAY);
 
 		setBorder(titleBorder);
 		setLayout(new GridBagLayout());
 
 		int y = 0;
-		JTable table = new JTable();
+		final JTable table = new JTable();
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 		table.setModel(this.contribModel);
 		table.getColumnModel().getColumn(ContribModel.COLUMN_SELECTED).setMaxWidth(40);
@@ -52,7 +52,7 @@ public class SettingsPanel extends JPanel {
 		table.getColumnModel().getColumn(ContribModel.COLUMN_AUTHOR).setPreferredWidth(100);
 		table.getColumnModel().getColumn(ContribModel.COLUMN_CLASS).setPreferredWidth(200);
 
-		JScrollPane scrollPane = new JScrollPane(table);
+		final JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(250, 100));
 		add(scrollPane, GridBagData.forPanel(0, y++).gridwidth(2));
 
@@ -66,7 +66,6 @@ public class SettingsPanel extends JPanel {
 
 		this.mapWidth = new JSpinner();
 		this.mapWidth.setModel(new SpinnerNumberModel(20, 10, 100, 1));
-		this.mapWidth.addChangeListener(e -> this.lastGame.setSleepTime((int) this.sleepTime.getValue()));
 
 		add(new JLabel("Map width:"), GridBagData.forLabel(0, y));
 		add(this.mapWidth, GridBagData.forControl(1, y));
@@ -74,7 +73,6 @@ public class SettingsPanel extends JPanel {
 
 		this.mapHeight = new JSpinner();
 		this.mapHeight.setModel(new SpinnerNumberModel(15, 7, 100, 1));
-		this.mapHeight.addChangeListener(e -> this.lastGame.setSleepTime((int) this.sleepTime.getValue()));
 
 		add(new JLabel("Map height:"), GridBagData.forLabel(0, y));
 		add(this.mapHeight, GridBagData.forControl(1, y));
@@ -82,11 +80,11 @@ public class SettingsPanel extends JPanel {
 	}
 
 	public Game createGame() {
-		MapGenerator generator = new MapGenerator();
+		final MapGenerator generator = new MapGenerator();
 		generator.setWidth((int) this.mapWidth.getValue());
 		generator.setHeight((int) this.mapHeight.getValue());
 
-		Map map = generator.generate();
+		final Map map = generator.generate();
 		this.lastGame = new Game(map);
 		this.lastGame.setSleepTime((int) this.sleepTime.getValue());
 		return this.lastGame;
