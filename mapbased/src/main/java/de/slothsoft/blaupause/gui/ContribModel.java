@@ -6,7 +6,13 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import de.slothsoft.blaupause.Contrib;
-import de.slothsoft.blaupause.Contribs;
+
+/**
+ * A table model that displays all contribs with a selection check box.
+ *
+ * @author Stef Schulz
+ * @since 1.0.0
+ */
 
 public class ContribModel extends AbstractTableModel {
 
@@ -20,8 +26,8 @@ public class ContribModel extends AbstractTableModel {
 
 	private final List<Row> rows = new ArrayList<>();
 
-	public ContribModel() {
-		for (final Contrib contrib : Contribs.fetchAllImplementations()) {
+	public ContribModel(List<Contrib> contribs) {
+		for (final Contrib contrib : contribs) {
 			this.rows.add(new Row(contrib.getDisplayName(), contrib.getAuthor(), contrib.getClass()));
 		}
 	}
@@ -106,7 +112,7 @@ public class ContribModel extends AbstractTableModel {
 	 *
 	 */
 
-	static class Row {
+	private static class Row {
 
 		final String displayName;
 		final String author;

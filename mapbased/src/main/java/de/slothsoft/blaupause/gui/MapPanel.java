@@ -5,8 +5,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import de.slothsoft.blaupause.Map;
+
+/**
+ * A {@link JPanel} that displays a {@link Map}.
+ *
+ * @author Stef Schulz
+ * @since 1.0.0
+ */
 
 public class MapPanel extends JComponent {
 

@@ -16,25 +16,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-import de.slothsoft.blaupause.contrib.ExampleContrib;
-
 /**
- * Util class for getting and managing {@link Contrib}s (hence the name)
+ * Util class for getting and managing {@link Contrib}s (hence the name).
  *
+ * @author Stef Schulz
  * @since 1.0.0
  */
 
 public final class Contribs {
-
-	/**
-	 * Returns all instances of {@link Contrib}s in the <code>contrib</code> package.
-	 *
-	 * @return a list of implementations
-	 */
-
-	public static List<Contrib> fetchAllImplementations() {
-		return fetchImplementations(ExampleContrib.class.getPackage());
-	}
 
 	/**
 	 * Returns all instances of {@link Contrib}s in a specified package.
@@ -43,16 +32,29 @@ public final class Contribs {
 	 * @return a list of implementations
 	 */
 
-	static List<Contrib> fetchImplementations(Package searchedPackage) {
+	public static List<Contrib> fetchContribImplementations(Package searchedPackage) {
+		return fetchImplementationsForClass(searchedPackage, Contrib.class);
+	}
+
+	/**
+	 * Returns all instances of a specified class in a specified package.
+	 *
+	 * @param searchedPackage - the package to be searched
+	 * @param <T> - the type of class to search for
+	 * @return a list of implementations
+	 */
+
+	@SuppressWarnings("unchecked")
+	public static <T> List<T> fetchImplementationsForClass(Package searchedPackage, Class<T> searched) {
 		try {
-			final List<Contrib> contribs = new ArrayList<>();
+			final List<T> result = new ArrayList<>();
 			final List<Class<?>> classes = getClasses(searchedPackage.getName());
 			for (final Class<?> clazz : classes) {
-				if (!Modifier.isAbstract(clazz.getModifiers()) && Contrib.class.isAssignableFrom(clazz)) {
-					contribs.add((Contrib) clazz.newInstance());
+				if (!Modifier.isAbstract(clazz.getModifiers()) && searched.isAssignableFrom(clazz)) {
+					result.add((T) clazz.newInstance());
 				}
 			}
-			return contribs;
+			return result;
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -77,8 +79,10 @@ public final class Contribs {
 			Path[] pathToFolders;
 			if (uri.getScheme().equals("jar")) {
 				// we are in the application JAR
-				final FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
-				pathToFolders = new Path[]{fileSystem.getPath('/' + path)};
+				try (final FileSystem fileSystem = FileSystems.newFileSystem(uri,
+						Collections.<String, Object>emptyMap());) {
+					pathToFolders = new Path[]{fileSystem.getPath('/' + path)};
+				}
 			} else {
 				// we are in the IDE
 				final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();

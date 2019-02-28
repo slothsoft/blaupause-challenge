@@ -3,6 +3,13 @@ package de.slothsoft.blaupause.gui;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+/**
+ * A util class to use {@link GridBagConstraints} more easily.
+ *
+ * @author Stef Schulz
+ * @since 1.0.0
+ */
+
 public class GridBagData extends java.awt.GridBagConstraints {
 
 	private static final long serialVersionUID = -926583559831460452L;

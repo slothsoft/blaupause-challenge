@@ -6,11 +6,12 @@ import java.util.function.Consumer;
 
 /**
  * A start class for each game.
- * 
+ *
+ * @author Stef Schulz
  * @since 1.0.0
  */
 
-public class Game {
+public abstract class Game {
 
 	private final Map map;
 	private final Thread thread = new Thread(this::run);
@@ -33,13 +34,13 @@ public class Game {
 		this.thread.start();
 	}
 
-	private void run() {
+	protected void run() {
 		while (!this.stop) {
 			executeRound();
 		}
 	}
 
-	private void executeRound() {
+	protected void executeRound() {
 		executeRoundOnMap();
 
 		if (isGameOver()) {
@@ -49,27 +50,33 @@ public class Game {
 
 		try {
 			Thread.sleep(this.sleepTime);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private void executeRoundOnMap() {
-		// TODO: what to do in each round
-	}
+	/**
+	 * Execute what to do in each round.
+	 */
 
-	private boolean isGameOver() {
-		return false; // TODO: when to stop
-	}
+	protected abstract void executeRoundOnMap();
 
-	private void finishGame() {
+	/**
+	 * Returns true when the game is over.
+	 *
+	 * @return true or false
+	 */
+
+	protected abstract boolean isGameOver();
+
+	protected void finishGame() {
 		stopGame();
-		Set<Contrib> existingContribs = this.map.getExistingContribs();
+		final Set<Contrib> existingContribs = this.map.getExistingContribs();
 		this.onFinish.accept(existingContribs.isEmpty() ? null : existingContribs.iterator().next());
 	}
 
 	/**
-	 * Stops the current game
+	 * Stops the current game.
 	 */
 
 	public void stopGame() {
@@ -106,17 +113,4 @@ public class Game {
 		this.sleepTime = sleepTime;
 	}
 
-	class ContextImpl implements Contrib.Context {
-
-		@Override
-		public int getValueA() {
-			return 0;
-		}
-
-		@Override
-		public int getValueB() {
-			return 42;
-		}
-
-	}
 }

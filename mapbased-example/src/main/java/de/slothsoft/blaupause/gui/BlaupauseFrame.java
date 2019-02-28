@@ -9,11 +9,6 @@ import javax.swing.JPanel;
 
 import de.slothsoft.blaupause.Contrib;
 import de.slothsoft.blaupause.Game;
-import de.slothsoft.blaupause.gui.GridBagData;
-import de.slothsoft.blaupause.gui.HighScorePanel;
-import de.slothsoft.blaupause.gui.MapPanel;
-import de.slothsoft.blaupause.gui.ScorePanel;
-import de.slothsoft.blaupause.gui.SettingsPanel;
 
 public class BlaupauseFrame extends JFrame {
 
@@ -33,7 +28,7 @@ public class BlaupauseFrame extends JFrame {
 	private void createMainPanel() {
 		setLayout(new BorderLayout());
 
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		panel.add(this.mapPanel, BorderLayout.CENTER);
 		panel.add(this.scorePanel, BorderLayout.SOUTH);
@@ -42,7 +37,7 @@ public class BlaupauseFrame extends JFrame {
 		add(this.settingsPanel, BorderLayout.WEST);
 		add(this.highScorePanel, BorderLayout.EAST);
 
-		JButton restartButton = new JButton("Restart");
+		final JButton restartButton = new JButton("Restart");
 		restartButton.addActionListener(e -> restart());
 		this.settingsPanel.add(restartButton, GridBagData.forControl(1, 10));
 

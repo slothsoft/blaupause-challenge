@@ -20,7 +20,7 @@ public class ScorePanel extends JComponent {
 	private void createControls() {
 		setLayout(new FlowLayout());
 
-		for (Contrib contrib : this.map.getExistingContribs()) {
+		for (final Contrib contrib : this.map.getExistingContribs()) {
 			add(new ContribControl(contrib));
 		}
 	}
@@ -47,8 +47,8 @@ public class ScorePanel extends JComponent {
 
 		private Icon createIcon(Contrib contrib) {
 			final int size = 32;
-			BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-			Graphics2D g = image.createGraphics();
+			final BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+			final Graphics2D g = image.createGraphics();
 			g.scale(size / MapRenderer.WIDTH_IN_PIXELS, size / MapRenderer.HEIGHT_IN_PIXELS);
 			new MapRenderer().paintContrib(g, contrib);
 			g.dispose();

@@ -9,6 +9,13 @@ import de.slothsoft.blaupause.ContribTile;
 import de.slothsoft.blaupause.Map;
 import de.slothsoft.blaupause.Tile;
 
+/**
+ * A class that is able to render a {@link Map} with tiles.
+ *
+ * @author Stef Schulz
+ * @since 1.0.0
+ */
+
 public class MapRenderer {
 
 	static final int BORDER_WIDTH = 2;
@@ -18,10 +25,8 @@ public class MapRenderer {
 	/**
 	 * Paints a map
 	 *
-	 * @param graphics
-	 *            graphics
-	 * @param map
-	 *            block array
+	 * @param graphics graphics
+	 * @param map block array
 	 */
 
 	public void paintMap(Graphics2D graphics, Map map) {
@@ -36,10 +41,8 @@ public class MapRenderer {
 	/**
 	 * Paints an entire tile array
 	 *
-	 * @param graphics
-	 *            graphics
-	 * @param tiles
-	 *            tiles array
+	 * @param graphics graphics
+	 * @param tiles tiles array
 	 */
 
 	protected void paintTiles(Graphics2D graphics, Tile[][] tiles) {
@@ -57,10 +60,8 @@ public class MapRenderer {
 	/**
 	 * Paints a single tile of the map
 	 *
-	 * @param graphics
-	 *            graphics
-	 * @param tile
-	 *            tile
+	 * @param graphics graphics
+	 * @param tile tile
 	 */
 
 	protected void paintTile(Graphics2D graphics, Tile tile) {
@@ -73,10 +74,8 @@ public class MapRenderer {
 	/**
 	 * Paints a single tile of the map
 	 *
-	 * @param graphics
-	 *            graphics
-	 * @param contrib
-	 *            the contrib to be painted
+	 * @param graphics graphics
+	 * @param contrib the contrib to be painted
 	 */
 
 	public void paintContrib(Graphics2D graphics, Contrib contrib) {

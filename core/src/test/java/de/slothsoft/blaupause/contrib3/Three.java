@@ -4,8 +4,5 @@ import de.slothsoft.blaupause.contrib.AbstractContrib;
 
 public class Three extends AbstractContrib {
 
-	@Override
-	public Action execute(Context context) {
-		return null;
-	}
+	// nothing to add
 }

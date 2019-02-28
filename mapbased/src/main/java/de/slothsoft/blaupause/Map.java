@@ -5,7 +5,8 @@ import java.util.Set;
 
 /**
  * A basic map with tiles.
- * 
+ *
+ * @author Stef Schulz
  * @since 1.0.0
  */
 
@@ -34,9 +35,9 @@ public class Map {
 	}
 
 	public Set<Contrib> getExistingContribs() {
-		Set<Contrib> result = new HashSet<>();
-		for (Tile[] row : this.tiles) {
-			for (Tile tile : row) {
+		final Set<Contrib> result = new HashSet<>();
+		for (final Tile[] row : this.tiles) {
+			for (final Tile tile : row) {
 				if (tile instanceof ContribTile) {
 					result.add(((ContribTile) tile).getContrib());
 				}

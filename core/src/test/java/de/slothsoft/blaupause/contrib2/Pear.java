@@ -5,11 +5,6 @@ import de.slothsoft.blaupause.Contrib;
 public class Pear implements Contrib {
 
 	@Override
-	public Action execute(Context context) {
-		return null;
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof Pear;
 	}
@@ -21,7 +16,7 @@ public class Pear implements Contrib {
 
 	@Override
 	public String toString() {
-		return "PearPositioner";
+		return "Pear";
 	}
 
 }

@@ -6,26 +6,22 @@ import java.util.Random;
 /**
  * A generator for {@link Map}.
  *
+ * @author Stef Schulz
  * @since 1.0.0
  */
 
 public class MapGenerator {
 
-	private final Random rnd = new Random();
+	protected final Random rnd = new Random();
 	private int width = 20;
 	private int height = 15;
 
 	public Map generate() {
-		final Map map = new Map(this.width, this.height);
-
-		int index = 0;
-		for (final Contrib contrib : Contribs.fetchAllImplementations()) {
-			map.tiles[7][index++] = new ContribTile(contrib);
-		}
-		return map;
+		return new Map(this.width, this.height);
 	}
 
-	private Point generateStartPoint(boolean[][] tiles) {
+	// TODO: test this method
+	public Point generateFreePosition(boolean[][] tiles) {
 		final Point point = new Point();
 		do {
 			point.x = this.rnd.nextInt(this.width);

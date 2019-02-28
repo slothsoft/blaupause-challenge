@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
+import de.slothsoft.blaupause.BlaupauseChallenge;
 import de.slothsoft.blaupause.Game;
 import de.slothsoft.blaupause.Map;
 import de.slothsoft.blaupause.MapGenerator;
@@ -22,7 +23,7 @@ public class SettingsPanel extends JPanel {
 
 	private static final long serialVersionUID = -2165255329208901685L;
 
-	private final ContribModel contribModel = new ContribModel();
+	private final ContribModel contribModel = new ContribModel(BlaupauseChallenge.fetchAllImplementations());
 
 	private JSpinner sleepTime;
 	private JSpinner mapWidth;
@@ -85,7 +86,7 @@ public class SettingsPanel extends JPanel {
 		generator.setHeight((int) this.mapHeight.getValue());
 
 		final Map map = generator.generate();
-		this.lastGame = new Game(map);
+		this.lastGame = new BlaupauseGame(map);
 		this.lastGame.setSleepTime((int) this.sleepTime.getValue());
 		return this.lastGame;
 	}
