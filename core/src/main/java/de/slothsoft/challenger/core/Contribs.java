@@ -82,6 +82,10 @@ public final class Contribs {
 				try (final FileSystem fileSystem = FileSystems.newFileSystem(uri,
 						Collections.<String, Object>emptyMap());) {
 					pathToFolders = new Path[]{fileSystem.getPath('/' + path)};
+
+					for (final Path pathToFolder : pathToFolders) {
+						classes.addAll(findClasses(pathToFolder, packageName));
+					}
 				}
 			} else {
 				// we are in the IDE
@@ -91,11 +95,10 @@ public final class Contribs {
 				for (int i = 0; i < pathToFolders.length; i++) {
 					pathToFolders[i] = Paths.get(resources.get(i).toURI());
 				}
+				for (final Path pathToFolder : pathToFolders) {
+					classes.addAll(findClasses(pathToFolder, packageName));
+				}
 			}
-			for (final Path pathToFolder : pathToFolders) {
-				classes.addAll(findClasses(pathToFolder, packageName));
-			}
-
 		} catch (final URISyntaxException e) {
 			throw new RuntimeException("This really should not have happend o_O", e);
 		}

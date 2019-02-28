@@ -1,6 +1,5 @@
 package de.slothsoft.challenger.mapbased;
 
-import java.awt.Point;
 import java.util.Random;
 
 /**
@@ -12,22 +11,13 @@ import java.util.Random;
 
 public class MapGenerator {
 
-	protected final Random rnd = new Random();
+	public static final Random RND = new Random();
+
 	private int width = 20;
 	private int height = 15;
 
 	public Map generate() {
 		return new Map(this.width, this.height);
-	}
-
-	// TODO: test this method
-	public Point generateFreePosition(boolean[][] tiles) {
-		final Point point = new Point();
-		do {
-			point.x = this.rnd.nextInt(this.width);
-			point.y = this.rnd.nextInt(this.height);
-		} while (tiles[point.x][point.y]);
-		return point;
 	}
 
 	public int getHeight() {

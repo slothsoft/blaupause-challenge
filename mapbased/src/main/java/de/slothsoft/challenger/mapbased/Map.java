@@ -1,5 +1,6 @@
 package de.slothsoft.challenger.mapbased;
 
+import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +37,8 @@ public class Map {
 		return this.width;
 	}
 
+	// TODO: test getExistingContribs
+
 	public Set<Contrib> getExistingContribs() {
 		final Set<Contrib> result = new HashSet<>();
 		for (final Tile[] row : this.tiles) {
@@ -46,6 +49,17 @@ public class Map {
 			}
 		}
 		return result;
+	}
+
+	// TODO: test generateFreePosition
+
+	public Point generateFreePosition() {
+		final Point point = new Point();
+		do {
+			point.x = MapGenerator.RND.nextInt(this.width);
+			point.y = MapGenerator.RND.nextInt(this.height);
+		} while (this.tiles[point.x][point.y] != null);
+		return point;
 	}
 
 	public Tile[][] getTiles() {

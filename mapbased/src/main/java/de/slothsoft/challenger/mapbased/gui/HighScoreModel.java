@@ -69,6 +69,8 @@ public class HighScoreModel extends AbstractTableModel {
 		}
 	}
 
+	// TODO: test propagateWinner
+
 	public void propagateWinner(Contrib winner) {
 		final Row winnerRow = this.rows.stream().filter(r -> r.name.equals(winner.getDisplayName())).findFirst()
 				.orElse(new Row(winner.getDisplayName(), winner.getAuthor()));
@@ -84,7 +86,7 @@ public class HighScoreModel extends AbstractTableModel {
 	 *
 	 */
 
-	static class Row {
+	private static class Row {
 
 		final String name;
 		final String author;

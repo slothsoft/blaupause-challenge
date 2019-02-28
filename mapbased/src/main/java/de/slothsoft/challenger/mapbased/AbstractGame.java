@@ -13,7 +13,7 @@ import de.slothsoft.challenger.core.Contrib;
  * @since 1.0.0
  */
 
-public abstract class Game {
+public abstract class AbstractGame {
 
 	private final Map map;
 	private final Thread thread = new Thread(this::run);
@@ -23,7 +23,7 @@ public abstract class Game {
 	private Consumer<Contrib> onFinish = winner -> System.out
 			.println(winner == null ? "Game finished. There were no survivors." : "Game finished. " + winner + " won.");
 
-	public Game(Map map) {
+	public AbstractGame(Map map) {
 		this.map = Objects.requireNonNull(map);
 	}
 
@@ -93,7 +93,7 @@ public abstract class Game {
 		return this.onFinish;
 	}
 
-	public Game onFinish(Consumer<Contrib> newOnFinish) {
+	public AbstractGame onFinish(Consumer<Contrib> newOnFinish) {
 		setOnFinish(newOnFinish);
 		return this;
 	}
@@ -106,7 +106,7 @@ public abstract class Game {
 		return this.sleepTime;
 	}
 
-	public Game sleepTime(long newSleepTime) {
+	public AbstractGame sleepTime(long newSleepTime) {
 		setSleepTime(newSleepTime);
 		return this;
 	}

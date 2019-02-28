@@ -26,11 +26,11 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<finalName>blaupause-challenge</finalName>
+					<finalName>challenge-blueprint</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
-							<mainClass>de.slothsoft.blaupause.BlaupauseChallenge</mainClass>
+							<mainClass>de.slothsoft.blueprint.BlueprintChallenge</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

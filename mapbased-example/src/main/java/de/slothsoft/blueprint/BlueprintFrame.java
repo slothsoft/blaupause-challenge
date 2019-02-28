@@ -2,30 +2,53 @@ package de.slothsoft.blueprint;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import de.slothsoft.challenger.core.Contrib;
-import de.slothsoft.challenger.mapbased.Game;
+import de.slothsoft.challenger.mapbased.AbstractGame;
+import de.slothsoft.challenger.mapbased.Map;
+import de.slothsoft.challenger.mapbased.Tile;
 import de.slothsoft.challenger.mapbased.gui.GridBagData;
 import de.slothsoft.challenger.mapbased.gui.HighScorePanel;
 import de.slothsoft.challenger.mapbased.gui.MapPanel;
+import de.slothsoft.challenger.mapbased.gui.MapRenderer;
 
-public class BlaupauseFrame extends JFrame {
+/**
+ * This class is the window that holds everything. Most importantly, it holds the
+ * {@link Map}.
+ */
+
+public class BlueprintFrame extends JFrame {
 
 	private static final long serialVersionUID = -2165255329208901685L;
 
+	/**
+	 * This class can render all kinds of {@link Tile}s.
+	 */
+
+	public class BlueprintMapRenderer extends MapRenderer {
+
+		@Override
+		public void paintContrib(Graphics2D graphics, Contrib contrib) {
+			final BlueprintContrib blueprint = (BlueprintContrib) contrib;
+			graphics.setColor(blueprint.getColor());
+			graphics.fillRect(0, 0, this.tileWidth, this.tileHeight);
+		}
+
+	}
+
 	private final SettingsPanel settingsPanel = new SettingsPanel();
 	private final HighScorePanel highScorePanel = new HighScorePanel();
-	private final MapPanel mapPanel = new MapPanel();
-	private final ScorePanel scorePanel = new ScorePanel();
+	private final MapPanel mapPanel = new MapPanel(new BlueprintMapRenderer());
 
-	private Game game;
+	private AbstractGame game;
 
-	public BlaupauseFrame() {
-		setTitle("Blaupause");
+	public BlueprintFrame() {
+		setTitle("Blueprint");
 	}
 
 	private void createMainPanel() {
@@ -34,7 +57,6 @@ public class BlaupauseFrame extends JFrame {
 		final JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		panel.add(this.mapPanel, BorderLayout.CENTER);
-		panel.add(this.scorePanel, BorderLayout.SOUTH);
 
 		add(panel, BorderLayout.CENTER);
 		add(this.settingsPanel, BorderLayout.WEST);
@@ -50,20 +72,26 @@ public class BlaupauseFrame extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
+	@Override
+	public void setVisible(boolean b) {
+		if (!isVisible() && b) {
+			createMainPanel();
+			start();
+			doLayout();
+		}
+		super.setVisible(b);
+	}
+
 	public void restart() {
 		stop();
 		start();
 	}
 
 	public void start() {
-		createMainPanel();
-		setVisible(true);
 		this.game = this.settingsPanel.createGame();
 		this.mapPanel.setMap(this.game.getMap());
-		this.scorePanel.setMap(this.game.getMap());
 		this.game.onFinish(this::gameFinished);
 		this.game.start();
-		doLayout();
 	}
 
 	private void gameFinished(Contrib winner) {
@@ -85,7 +113,7 @@ public class BlaupauseFrame extends JFrame {
 		return this.settingsPanel.isVisible();
 	}
 
-	public BlaupauseFrame showSettings(boolean showSettings) {
+	public BlueprintFrame showSettings(boolean showSettings) {
 		setShowSettings(showSettings);
 		return this;
 	}

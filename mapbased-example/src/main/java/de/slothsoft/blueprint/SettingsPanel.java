@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -14,7 +15,8 @@ import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
-import de.slothsoft.challenger.mapbased.Game;
+import de.slothsoft.challenger.core.Contrib;
+import de.slothsoft.challenger.mapbased.ContribTile;
 import de.slothsoft.challenger.mapbased.Map;
 import de.slothsoft.challenger.mapbased.MapGenerator;
 import de.slothsoft.challenger.mapbased.gui.ContribModel;
@@ -24,13 +26,13 @@ public class SettingsPanel extends JPanel {
 
 	private static final long serialVersionUID = -2165255329208901685L;
 
-	private final ContribModel contribModel = new ContribModel(BlaupauseChallenge.fetchAllImplementations());
+	private final ContribModel contribModel = new ContribModel(BlueprintChallenge.fetchAllImplementations());
 
 	private JSpinner sleepTime;
 	private JSpinner mapWidth;
 	private JSpinner mapHeight;
 
-	private Game lastGame;
+	private BlueprintGame lastGame;
 
 	public SettingsPanel() {
 		setLayout(new BorderLayout());
@@ -81,13 +83,18 @@ public class SettingsPanel extends JPanel {
 		y++;
 	}
 
-	public Game createGame() {
+	public BlueprintGame createGame() {
 		final MapGenerator generator = new MapGenerator();
 		generator.setWidth((int) this.mapWidth.getValue());
 		generator.setHeight((int) this.mapHeight.getValue());
 
 		final Map map = generator.generate();
-		this.lastGame = new BlaupauseGame(map);
+		for (final Contrib contrib : BlueprintChallenge.fetchAllImplementations()) {
+			final Point position = map.generateFreePosition();
+			map.getTiles()[position.x][position.y] = new ContribTile(contrib);
+		}
+
+		this.lastGame = new BlueprintGame(map);
 		this.lastGame.setSleepTime((int) this.sleepTime.getValue());
 		return this.lastGame;
 	}

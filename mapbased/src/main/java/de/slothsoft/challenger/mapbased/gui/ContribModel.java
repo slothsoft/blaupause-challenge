@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import de.slothsoft.challenger.core.Contrib;
 
 /**
- * A table model that displays all contribs with a selection check box.
+ * A table model that displays all {@link Contrib}s with a selection check box.
  *
  * @author Stef Schulz
  * @since 1.0.0

@@ -19,8 +19,9 @@ import de.slothsoft.challenger.mapbased.Tile;
 public class MapRenderer {
 
 	static final int BORDER_WIDTH = 2;
-	public static final int WIDTH_IN_PIXELS = 16;
-	public static final int HEIGHT_IN_PIXELS = 16;
+
+	protected int tileWidth = 16;
+	protected int tileHeight = 16;
 
 	/**
 	 * Paints a map
@@ -32,8 +33,8 @@ public class MapRenderer {
 	public void paintMap(Graphics2D graphics, Map map) {
 		graphics.setStroke(new BasicStroke(BORDER_WIDTH));
 		graphics.setColor(Color.DARK_GRAY);
-		graphics.drawRect(-BORDER_WIDTH, -BORDER_WIDTH, map.getWidth() * WIDTH_IN_PIXELS + 2 * BORDER_WIDTH - 1,
-				map.getHeight() * HEIGHT_IN_PIXELS + 2 * BORDER_WIDTH - 1);
+		graphics.drawRect(-BORDER_WIDTH, -BORDER_WIDTH, map.getWidth() * this.tileWidth + 2 * BORDER_WIDTH - 1,
+				map.getHeight() * this.tileHeight + 2 * BORDER_WIDTH - 1);
 
 		paintTiles(graphics, map.getTiles());
 	}
@@ -49,9 +50,9 @@ public class MapRenderer {
 		for (int xi = 0; xi < tiles.length; xi++) {
 			for (int yi = 0; yi < tiles[xi].length; yi++) {
 				if (tiles[xi][yi] != null) {
-					graphics.translate(xi * WIDTH_IN_PIXELS, yi * HEIGHT_IN_PIXELS);
+					graphics.translate(xi * this.tileWidth, yi * this.tileHeight);
 					paintTile(graphics, tiles[xi][yi]);
-					graphics.translate(-xi * WIDTH_IN_PIXELS, -yi * HEIGHT_IN_PIXELS);
+					graphics.translate(-xi * this.tileWidth, -yi * this.tileHeight);
 				}
 			}
 		}
@@ -79,8 +80,74 @@ public class MapRenderer {
 	 */
 
 	public void paintContrib(Graphics2D graphics, Contrib contrib) {
+		// this is a default behavior that's probably stupid...
+		// but at least this class doesn't have to be abstract
 		graphics.setColor(Color.RED);
-		graphics.fillRect(0, 0, WIDTH_IN_PIXELS, HEIGHT_IN_PIXELS);
+		graphics.fillRect(0, 0, this.tileWidth, this.tileHeight);
+	}
+
+	/**
+	 * Returns the width of a single {@link Tile} in pixels.
+	 *
+	 * @return a pixel value
+	 */
+
+	public int getTileWidth() {
+		return this.tileWidth;
+	}
+
+	/**
+	 * Sets the width of a single {@link Tile} in pixels.
+	 *
+	 * @param newTileWidth - a pixel value
+	 * @return this instance
+	 */
+
+	public MapRenderer tileWidth(int newTileWidth) {
+		setTileWidth(newTileWidth);
+		return this;
+	}
+
+	/**
+	 * Sets the width of a single {@link Tile} in pixels.
+	 *
+	 * @param tileWidth - a pixel value
+	 */
+
+	public void setTileWidth(int tileWidth) {
+		this.tileWidth = tileWidth;
+	}
+
+	/**
+	 * Returns the height of a single {@link Tile} in pixels.
+	 *
+	 * @return a pixel value
+	 */
+
+	public int getTileHeight() {
+		return this.tileHeight;
+	}
+
+	/**
+	 * Sets the height of a single {@link Tile} in pixels.
+	 *
+	 * @param newTileHeight - a pixel value
+	 * @return this instance
+	 */
+
+	public MapRenderer tileHeight(int newTileHeight) {
+		setTileHeight(newTileHeight);
+		return this;
+	}
+
+	/**
+	 * Sets the height of a single {@link Tile} in pixels.
+	 *
+	 * @param tileHeight - a pixel value
+	 */
+
+	public void setTileHeight(int tileHeight) {
+		this.tileHeight = tileHeight;
 	}
 
 }
