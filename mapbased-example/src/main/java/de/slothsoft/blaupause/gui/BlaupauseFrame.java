@@ -9,6 +9,11 @@ import javax.swing.JPanel;
 
 import de.slothsoft.blaupause.Contrib;
 import de.slothsoft.blaupause.Game;
+import de.slothsoft.blaupause.gui.GridBagData;
+import de.slothsoft.blaupause.gui.HighScorePanel;
+import de.slothsoft.blaupause.gui.MapPanel;
+import de.slothsoft.blaupause.gui.ScorePanel;
+import de.slothsoft.blaupause.gui.SettingsPanel;
 
 public class BlaupauseFrame extends JFrame {
 

@@ -12,34 +12,34 @@ public class ContribModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 6708900198232721648L;
 
-	private static final String[] COLUMNS = { "Use", "Name", "Author", "Class" };
+	private static final String[] COLUMNS = {"Use", "Name", "Author", "Class"};
 	public static final int COLUMN_SELECTED = 0;
 	public static final int COLUMN_NAME = 1;
 	public static final int COLUMN_AUTHOR = 2;
 	public static final int COLUMN_CLASS = 3;
 
-	private List<Row> rows = new ArrayList<>();
+	private final List<Row> rows = new ArrayList<>();
 
 	public ContribModel() {
-		for (Contrib contrib : Contribs.fetchAllImplementations()) {
+		for (final Contrib contrib : Contribs.fetchAllImplementations()) {
 			this.rows.add(new Row(contrib.getDisplayName(), contrib.getAuthor(), contrib.getClass()));
 		}
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Row row = this.rows.get(rowIndex);
+		final Row row = this.rows.get(rowIndex);
 		switch (columnIndex) {
-		case COLUMN_SELECTED:
-			return Boolean.valueOf(row.selected);
-		case COLUMN_NAME:
-			return row.displayName;
-		case COLUMN_AUTHOR:
-			return row.author;
-		case COLUMN_CLASS:
-			return row.contribClass.getSimpleName();
-		default:
-			return null;
+			case COLUMN_SELECTED :
+				return Boolean.valueOf(row.selected);
+			case COLUMN_NAME :
+				return row.displayName;
+			case COLUMN_AUTHOR :
+				return row.author;
+			case COLUMN_CLASS :
+				return row.contribClass.getSimpleName();
+			default :
+				return null;
 		}
 	}
 
@@ -61,40 +61,40 @@ public class ContribModel extends AbstractTableModel {
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
-		case COLUMN_SELECTED:
-			return Boolean.class;
-		case COLUMN_NAME:
-		case COLUMN_AUTHOR:
-		case COLUMN_CLASS:
-			return String.class;
-		default:
-			return super.getColumnClass(columnIndex);
+			case COLUMN_SELECTED :
+				return Boolean.class;
+			case COLUMN_NAME :
+			case COLUMN_AUTHOR :
+			case COLUMN_CLASS :
+				return String.class;
+			default :
+				return super.getColumnClass(columnIndex);
 		}
 	}
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
-		case COLUMN_SELECTED:
-			return true;
-		default:
-			return false;
+			case COLUMN_SELECTED :
+				return true;
+			default :
+				return false;
 		}
 	}
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		Row row = this.rows.get(rowIndex);
+		final Row row = this.rows.get(rowIndex);
 		switch (columnIndex) {
-		case COLUMN_SELECTED:
-			row.selected = ((Boolean) aValue).booleanValue();
-			break;
-		default:
+			case COLUMN_SELECTED :
+				row.selected = ((Boolean) aValue).booleanValue();
+				break;
+			default :
 		}
 	}
 
 	public Contrib createContrib(int rowIndex) {
-		Row row = this.rows.get(rowIndex);
+		final Row row = this.rows.get(rowIndex);
 		try {
 			return row.selected ? row.contribClass.newInstance() : null;
 		} catch (InstantiationException | IllegalAccessException e) {
@@ -103,7 +103,7 @@ public class ContribModel extends AbstractTableModel {
 	}
 
 	/*
-	 * 
+	 *
 	 */
 
 	static class Row {
