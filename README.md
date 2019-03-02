@@ -5,7 +5,7 @@
 - **Author:** [Stef Schulz](mailto:s.schulz@slothsoft.de)
 - **Repository:** <https://github.com/slothsoft/framework-challenger>
 - **Open Issues:** <https://github.com/slothsoft/framework-challenger/issues>
-- **Wiki:** <https://github.com/slothsoft/framework-challenger/issues>
+- **Wiki:** none
 
 
 Sometimes I like to create a little programming challenge. Some of these share code, even though not really, so it only seemed right to have a Maven archetype for these things.
