@@ -1,6 +1,6 @@
-package de.slothsoft.blaupause.contrib3;
+package de.slothsoft.challenger.core.contrib3;
 
-import de.slothsoft.blaupause.contrib.AbstractContrib;
+import de.slothsoft.challenger.core.AbstractContrib;
 
 public class Three extends AbstractContrib {
 

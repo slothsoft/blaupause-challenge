@@ -1,6 +1,6 @@
-package de.slothsoft.blaupause.contrib2;
+package de.slothsoft.challenger.core.contrib2;
 
-import de.slothsoft.blaupause.Contrib;
+import de.slothsoft.challenger.core.Contrib;
 
 public class Pear implements Contrib {
 

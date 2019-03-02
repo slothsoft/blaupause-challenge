@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause.contrib1;
+package de.slothsoft.challenger.core.contrib1;
 
 public class C {
 

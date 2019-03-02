@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause;
+package de.slothsoft.challenger.core;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -16,87 +16,73 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-import de.slothsoft.blaupause.contrib.ExampleContrib;
-
 /**
- * Util class for getting and managing {@link Contrib}s (hence the name)
- * 
+ * Util class for getting and managing contributions (hence the name)
+ *
  * @since 1.0.0
  */
 
 public final class Contribs {
 
 	/**
-	 * Returns all instances of {@link Contrib}s in the
-	 * <code>contrib</code> package.
-	 * 
+	 * Returns all instances of contributions in a specified package.
+	 *
+	 * @param searchedPackage - the package to be searched
+	 * @param C - type to search for
 	 * @return a list of implementations
 	 */
 
-	public static List<Contrib> fetchAllImplementations() {
-		return fetchImplementations(ExampleContrib.class.getPackage());
-	}
-
-	/**
-	 * Returns all instances of {@link Contrib}s in a specified package.
-	 * 
-	 * @param searchedPackage
-	 *            - the package to be searched
-	 * @return a list of implementations
-	 */
-
-	static List<Contrib> fetchImplementations(Package searchedPackage) {
+	@SuppressWarnings("unchecked")
+	static <C> List<C> fetchImplementations(Package searchedPackage, Class<C> contribClass) {
 		try {
-			List<Contrib> contribs = new ArrayList<>();
-			List<Class<?>> classes = getClasses(searchedPackage.getName());
-			for (Class<?> clazz : classes) {
-				if (!Modifier.isAbstract(clazz.getModifiers()) && Contrib.class.isAssignableFrom(clazz)) {
-					contribs.add((Contrib) clazz.newInstance());
+			final List<C> contribs = new ArrayList<>();
+			final List<Class<?>> classes = getClasses(searchedPackage.getName());
+			for (final Class<?> clazz : classes) {
+				if (!Modifier.isAbstract(clazz.getModifiers()) && contribClass.isAssignableFrom(clazz)) {
+					contribs.add((C) clazz.newInstance());
 				}
 			}
 			return contribs;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	/**
-	 * Returns all implementations of {@link Contrib}s in a specified.
-	 * package.
-	 * 
-	 * @param packageName
-	 *            - the package to be searched (e.g. "de.slothsoft.game")
+	 * Returns all implementations of contributions in a specified. package.
+	 *
+	 * @param packageName - the package to be searched (e.g. "de.slothsoft.game")
 	 * @return a list of classes
 	 */
 
 	static List<Class<?>> getClasses(String packageName) throws ClassNotFoundException, IOException {
-		List<Class<?>> classes = new ArrayList<>();
-		String path = packageName.replace('.', '/');
+		final List<Class<?>> classes = new ArrayList<>();
+		final String path = packageName.replace('.', '/');
 
 		try {
-			URL resource = Contribs.class.getResource('/' + path);
+			final URL resource = Contribs.class.getResource('/' + path);
 			if (resource == null) return classes;
-			URI uri = resource.toURI();
+			final URI uri = resource.toURI();
 
 			Path[] pathToFolders;
 			if (uri.getScheme().equals("jar")) {
 				// we are in the application JAR
-				FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object> emptyMap());
-				pathToFolders = new Path[] { fileSystem.getPath('/' + path) };
+				final FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+				pathToFolders = new Path[]{fileSystem.getPath('/' + path)};
 			} else {
 				// we are in the IDE
-				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-				List<URL> resources = Collections.list(classLoader.getResources(path));
+				final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+				final List<URL> resources = Collections.list(classLoader.getResources(path));
 				pathToFolders = new Path[resources.size()];
 				for (int i = 0; i < pathToFolders.length; i++) {
 					pathToFolders[i] = Paths.get(resources.get(i).toURI());
 				}
 			}
-			for (Path pathToFolder : pathToFolders) {
+			for (final Path pathToFolder : pathToFolders) {
 				classes.addAll(findClasses(pathToFolder, packageName));
 			}
 
-		} catch (URISyntaxException e) {
+		} catch (final URISyntaxException e) {
 			throw new RuntimeException("This really should not have happend o_O", e);
 		}
 		return classes;
@@ -104,12 +90,12 @@ public final class Contribs {
 
 	private static List<Class<?>> findClasses(Path directory, String packageName)
 			throws ClassNotFoundException, IOException {
-		List<Class<?>> classes = new ArrayList<>();
+		final List<Class<?>> classes = new ArrayList<>();
 		try (Stream<Path> walker = Files.walk(directory, Integer.MAX_VALUE)) {
-			for (Iterator<Path> it = walker.iterator(); it.hasNext();) {
-				Path file = it.next();
+			for (final Iterator<Path> it = walker.iterator(); it.hasNext();) {
+				final Path file = it.next();
 				if (!Files.isDirectory(file)) {
-					String fileName = file.getFileName().toString();
+					final String fileName = file.getFileName().toString();
 					if (fileName.endsWith(".class")) {
 						classes.add(Class.forName(packageName + '.' + fileName.substring(0, fileName.length() - 6)));
 					}
