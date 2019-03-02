@@ -28,7 +28,7 @@ public final class Contributions {
 	 * Returns all instances of contributions in a specified package.
 	 *
 	 * @param searchedPackage - the package to be searched
-	 * @param C - type to search for
+	 * @param <C> - type to search for
 	 * @return a list of implementations
 	 */
 
