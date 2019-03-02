@@ -1,10 +1,10 @@
-package de.slothsoft.blaupause.contrib;
+package ${package}.contrib;
 
 import java.util.Objects;
 
-import de.slothsoft.blaupause.Contrib;
+import ${package}.${contribName};
 
-public abstract class AbstractContrib implements Contrib {
+public abstract class Abstract${contribName} implements ${contribName} {
 
 	@Override
 	public int hashCode() {
@@ -22,7 +22,7 @@ public abstract class AbstractContrib implements Contrib {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		AbstractContrib that = (AbstractContrib) obj;
+		Abstract${contribName} that = (Abstract${contribName}) obj;
 		if (!Objects.equals(getDisplayName(), that.getDisplayName())) {
 			return false;
 		}

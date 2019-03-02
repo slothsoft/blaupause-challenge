@@ -1,14 +1,16 @@
-package de.slothsoft.blaupause.gui;
+package ${package}.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import de.slothsoft.blaupause.Contrib;
-import de.slothsoft.blaupause.Contribs;
+import ${package}.${contribName};
+import ${package}.contrib.Example${contribName};
 
-public class ContribModel extends AbstractTableModel {
+import de.slothsoft.challenger.core.Contributions;
+
+public class ${contribName}Model extends AbstractTableModel {
 
 	private static final long serialVersionUID = 6708900198232721648L;
 
@@ -20,8 +22,9 @@ public class ContribModel extends AbstractTableModel {
 
 	private List<Row> rows = new ArrayList<>();
 
-	public ContribModel() {
-		for (Contrib contrib : Contribs.fetchAllImplementations()) {
+	public ${contribName}Model() {
+		for (${contribName} contrib : Contributions.fetchImplementations(Example${contribName}.class.getPackage(), 
+				Example${contribName}.class)) {
 			this.rows.add(new Row(contrib.getDisplayName(), contrib.getAuthor(), contrib.getClass()));
 		}
 	}
@@ -93,7 +96,7 @@ public class ContribModel extends AbstractTableModel {
 		}
 	}
 
-	public Contrib createContrib(int rowIndex) {
+	public ${contribName} create${contribName}(int rowIndex) {
 		Row row = this.rows.get(rowIndex);
 		try {
 			return row.selected ? row.contribClass.newInstance() : null;
@@ -110,10 +113,10 @@ public class ContribModel extends AbstractTableModel {
 
 		final String displayName;
 		final String author;
-		final Class<? extends Contrib> contribClass;
+		final Class<? extends ${contribName}> contribClass;
 		boolean selected = true;
 
-		public Row(String displayName, String author, Class<? extends Contrib> contribClass) {
+		public Row(String displayName, String author, Class<? extends ${contribName}> contribClass) {
 			this.displayName = displayName;
 			this.author = author;
 			this.contribClass = contribClass;

@@ -5,6 +5,12 @@
 		<requiredProperty key="junitVersion">
 			<defaultValue>4.12</defaultValue>
 		</requiredProperty>
+		<requiredProperty key="contribName">
+			<defaultValue>Contribution</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="challengeName">
+			<defaultValue>Blueprint</defaultValue>
+		</requiredProperty>
 	</requiredProperties>
 
 	<fileSets>
@@ -13,6 +19,12 @@
 		</fileSet>
 		<fileSet filtered="true" packaged="true">
 			<directory>src/test/java</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="false">
+			<directory/>
+			<includes>
+				<include>README.md</include>
+			</includes>
 		</fileSet>
 	</fileSets>
 

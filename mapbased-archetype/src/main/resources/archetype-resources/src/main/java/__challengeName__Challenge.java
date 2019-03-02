@@ -1,18 +1,19 @@
-package de.slothsoft.blaupause;
+package ${package};
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import de.slothsoft.blaupause.gui.BlaupauseFrame;
+import ${package}.gui.${challengeName}Frame;
 
 /**
  * This class is the starting point for this application. It opens a "nice" GUI with
  * settings, a game field and the high scores.
  * 
+ * @author Stef Schulz
  * @since 1.0.0
  */
 
-public class BlaupauseChallenge {
+public class ${challengeName}Challenge {
 
 	public static void main(String[] args) {
 		try {
@@ -24,7 +25,7 @@ public class BlaupauseChallenge {
 	}
 
 	private static void createAndShowGui() {
-		BlaupauseFrame mainFrame = new BlaupauseFrame();
+		${challengeName}Frame mainFrame = new ${challengeName}Frame();
 		mainFrame.start();
 		mainFrame.pack();
 	}

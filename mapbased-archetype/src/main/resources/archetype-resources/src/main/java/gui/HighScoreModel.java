@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause.gui;
+package ${package}.gui;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import de.slothsoft.blaupause.Contrib;
+import ${package}.${contribName};
 
 public class HighScoreModel extends AbstractTableModel {
 
@@ -62,7 +62,7 @@ public class HighScoreModel extends AbstractTableModel {
 		}
 	}
 
-	public void propagateWinner(Contrib winner) {
+	public void propagateWinner(${contribName} winner) {
 		Row winnerRow = this.rows.stream().filter(r -> r.name.equals(winner.getDisplayName())).findFirst()
 				.orElse(new Row(winner.getDisplayName(), winner.getAuthor()));
 		winnerRow.victories++;

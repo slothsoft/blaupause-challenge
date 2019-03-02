@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause;
+package ${package};
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,6 +6,7 @@ import java.util.Set;
 /**
  * A basic map with tiles.
  * 
+ * @author Stef Schulz
  * @since 1.0.0
  */
 
@@ -33,12 +34,12 @@ public class Map {
 		return this.width;
 	}
 
-	public Set<Contrib> getExistingContribs() {
-		Set<Contrib> result = new HashSet<>();
+	public Set<${contribName}> getExisting${contribName}s() {
+		Set<${contribName}> result = new HashSet<>();
 		for (Tile[] row : this.tiles) {
 			for (Tile tile : row) {
-				if (tile instanceof ContribTile) {
-					result.add(((ContribTile) tile).getContrib());
+				if (tile instanceof ${contribName}Tile) {
+					result.add(((${contribName}Tile) tile).get${contribName}());
 				}
 			}
 		}

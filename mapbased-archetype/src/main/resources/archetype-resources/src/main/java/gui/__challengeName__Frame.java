@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause.gui;
+package ${package}.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -7,10 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import de.slothsoft.blaupause.Contrib;
-import de.slothsoft.blaupause.Game;
+import ${package}.${contribName};
+import ${package}.Game;
 
-public class BlaupauseFrame extends JFrame {
+public class ${challengeName}Frame extends JFrame {
 
 	private static final long serialVersionUID = -2165255329208901685L;
 
@@ -21,8 +21,8 @@ public class BlaupauseFrame extends JFrame {
 
 	private Game game;
 
-	public BlaupauseFrame() {
-		setTitle("Blaupause");
+	public ${challengeName}Frame() {
+		setTitle("${challengeName} Challenge");
 	}
 
 	private void createMainPanel() {
@@ -63,7 +63,7 @@ public class BlaupauseFrame extends JFrame {
 		doLayout();
 	}
 
-	private void gameFinished(Contrib winner) {
+	private void gameFinished(${contribName} winner) {
 		if (winner == null) {
 			System.out.println("Game finished. There were no survivors.");
 		} else {
@@ -82,7 +82,7 @@ public class BlaupauseFrame extends JFrame {
 		return this.settingsPanel.isVisible();
 	}
 
-	public BlaupauseFrame showSettings(boolean showSettings) {
+	public ${challengeName}Frame showSettings(boolean showSettings) {
 		setShowSettings(showSettings);
 		return this;
 	}

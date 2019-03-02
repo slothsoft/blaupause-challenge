@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause.gui;
+package ${package}.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 
-import de.slothsoft.blaupause.Contrib;
+import ${package}.${contribName};
 
 public class HighScorePanel extends JPanel {
 
@@ -43,7 +43,7 @@ public class HighScorePanel extends JPanel {
 		add(scrollPane, GridBagData.forPanel(0, 0).gridwidth(2));
 	}
 
-	public void propagateWinner(Contrib winner) {
+	public void propagateWinner(${contribName} winner) {
 		this.highScoreModel.propagateWinner(winner);
 	}
 }

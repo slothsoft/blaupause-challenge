@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause.gui;
+package ${package}.gui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 
-import de.slothsoft.blaupause.Map;
+import ${package}.Map;
 
 public class MapPanel extends JComponent {
 

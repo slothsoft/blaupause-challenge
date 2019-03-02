@@ -1,13 +1,13 @@
-package de.slothsoft.blaupause.gui;
+package ${package}.gui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import de.slothsoft.blaupause.Contrib;
-import de.slothsoft.blaupause.ContribTile;
-import de.slothsoft.blaupause.Map;
-import de.slothsoft.blaupause.Tile;
+import ${package}.${contribName};
+import ${package}.${contribName}Tile;
+import ${package}.Map;
+import ${package}.Tile;
 
 public class MapRenderer {
 
@@ -64,8 +64,8 @@ public class MapRenderer {
 	 */
 
 	protected void paintTile(Graphics2D graphics, Tile tile) {
-		if (tile instanceof ContribTile) {
-			paintContrib(graphics, ((ContribTile) tile).getContrib());
+		if (tile instanceof ${contribName}Tile) {
+			paint${contribName}(graphics, ((${contribName}Tile) tile).get${contribName}());
 		} else
 			throw new UnsupportedOperationException("Do not know how to paint " + tile + "!");
 	}
@@ -79,7 +79,7 @@ public class MapRenderer {
 	 *            the contrib to be painted
 	 */
 
-	public void paintContrib(Graphics2D graphics, Contrib contrib) {
+	public void paint${contribName}(Graphics2D graphics, ${contribName} contrib) {
 		graphics.setColor(Color.RED);
 		graphics.fillRect(0, 0, WIDTH_IN_PIXELS, HEIGHT_IN_PIXELS);
 	}

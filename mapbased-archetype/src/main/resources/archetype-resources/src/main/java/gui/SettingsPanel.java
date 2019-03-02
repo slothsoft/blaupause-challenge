@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause.gui;
+package ${package}.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,15 +14,15 @@ import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
-import de.slothsoft.blaupause.Game;
-import de.slothsoft.blaupause.Map;
-import de.slothsoft.blaupause.MapGenerator;
+import ${package}.Game;
+import ${package}.Map;
+import ${package}.MapGenerator;
 
 public class SettingsPanel extends JPanel {
 
 	private static final long serialVersionUID = -2165255329208901685L;
 
-	private final ContribModel contribModel = new ContribModel();
+	private final ${contribName}Model model = new ${contribName}Model();
 
 	private JSpinner sleepTime;
 	private JSpinner mapWidth;
@@ -45,12 +45,12 @@ public class SettingsPanel extends JPanel {
 		int y = 0;
 		final JTable table = new JTable();
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-		table.setModel(this.contribModel);
-		table.getColumnModel().getColumn(ContribModel.COLUMN_SELECTED).setMaxWidth(40);
-		table.getColumnModel().getColumn(ContribModel.COLUMN_NAME).setPreferredWidth(200);
-		table.getColumnModel().getColumn(ContribModel.COLUMN_NAME).setMaxWidth(200);
-		table.getColumnModel().getColumn(ContribModel.COLUMN_AUTHOR).setPreferredWidth(100);
-		table.getColumnModel().getColumn(ContribModel.COLUMN_CLASS).setPreferredWidth(200);
+		table.setModel(this.model);
+		table.getColumnModel().getColumn(${contribName}Model.COLUMN_SELECTED).setMaxWidth(40);
+		table.getColumnModel().getColumn(${contribName}Model.COLUMN_NAME).setPreferredWidth(200);
+		table.getColumnModel().getColumn(${contribName}Model.COLUMN_NAME).setMaxWidth(200);
+		table.getColumnModel().getColumn(${contribName}Model.COLUMN_AUTHOR).setPreferredWidth(100);
+		table.getColumnModel().getColumn(${contribName}Model.COLUMN_CLASS).setPreferredWidth(200);
 
 		final JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(250, 100));

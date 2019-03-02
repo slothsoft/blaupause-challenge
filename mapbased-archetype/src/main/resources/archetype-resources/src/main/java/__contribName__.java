@@ -1,6 +1,6 @@
-package de.slothsoft.blaupause;
+package ${package};
 
-public interface Contrib {
+public interface ${contribName} {
 
 	default String getDisplayName() {
 		return getClass().getSimpleName();

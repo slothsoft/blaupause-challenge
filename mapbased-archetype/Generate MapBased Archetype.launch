@@ -9,8 +9,8 @@
         <listEntry value="archetypeGroupId=de.slothsoft.challenger"/>
         <listEntry value="archetypeArtifactId=mapbased-archetype"/>
         <listEntry value="archetypeVersion=1.0.0-SNAPSHOT"/>
-        <listEntry value="artifactId=project"/>
         <listEntry value="groupId=org.acme"/>
+        <listEntry value="artifactId=project"/>
         <listEntry value="version=0.1.2-SNAPSHOT"/>
         <listEntry value="package=org.acme.project"/>
     </listAttribute>

@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause.gui;
+package ${package}.gui;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;

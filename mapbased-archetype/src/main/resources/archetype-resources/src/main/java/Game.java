@@ -1,4 +1,4 @@
-package de.slothsoft.blaupause;
+package ${package};
 
 import java.util.Objects;
 import java.util.Set;
@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 /**
  * A start class for each game.
  * 
+ * @author Stef Schulz
  * @since 1.0.0
  */
 
@@ -17,7 +18,7 @@ public class Game {
 
 	private boolean stop = true;
 	private long sleepTime = 100L;
-	private Consumer<Contrib> onFinish = winner -> System.out
+	private Consumer<${contribName}> onFinish = winner -> System.out
 			.println(winner == null ? "Game finished. There were no survivors." : "Game finished. " + winner + " won.");
 
 	public Game(Map map) {
@@ -64,7 +65,7 @@ public class Game {
 
 	private void finishGame() {
 		stopGame();
-		Set<Contrib> existingContribs = this.map.getExistingContribs();
+		Set<${contribName}> existingContribs = this.map.getExisting${contribName}s();
 		this.onFinish.accept(existingContribs.isEmpty() ? null : existingContribs.iterator().next());
 	}
 
@@ -80,16 +81,16 @@ public class Game {
 		return this.map;
 	}
 
-	public Consumer<Contrib> getOnFinish() {
+	public Consumer<${contribName}> getOnFinish() {
 		return this.onFinish;
 	}
 
-	public Game onFinish(Consumer<Contrib> newOnFinish) {
+	public Game onFinish(Consumer<${contribName}> newOnFinish) {
 		setOnFinish(newOnFinish);
 		return this;
 	}
 
-	public void setOnFinish(Consumer<Contrib> onFinish) {
+	public void setOnFinish(Consumer<${contribName}> onFinish) {
 		this.onFinish = Objects.requireNonNull(onFinish);
 	}
 
@@ -106,7 +107,7 @@ public class Game {
 		this.sleepTime = sleepTime;
 	}
 
-	class ContextImpl implements Contrib.Context {
+	class ContextImpl implements ${contribName}.Context {
 
 		@Override
 		public int getValueA() {

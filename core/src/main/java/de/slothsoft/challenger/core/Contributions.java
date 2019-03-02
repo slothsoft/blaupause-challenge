@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  * @since 1.0.0
  */
 
-public final class Contribs {
+public final class Contributions {
 
 	/**
 	 * Returns all instances of contributions in a specified package.
@@ -33,7 +33,7 @@ public final class Contribs {
 	 */
 
 	@SuppressWarnings("unchecked")
-	static <C> List<C> fetchImplementations(Package searchedPackage, Class<C> contribClass) {
+	public static <C> List<C> fetchImplementations(Package searchedPackage, Class<C> contribClass) {
 		try {
 			final List<C> contribs = new ArrayList<>();
 			final List<Class<?>> classes = getClasses(searchedPackage.getName());
@@ -60,15 +60,21 @@ public final class Contribs {
 		final String path = packageName.replace('.', '/');
 
 		try {
-			final URL resource = Contribs.class.getResource('/' + path);
+			final URL resource = Contributions.class.getResource('/' + path);
 			if (resource == null) return classes;
 			final URI uri = resource.toURI();
 
 			Path[] pathToFolders;
 			if (uri.getScheme().equals("jar")) {
 				// we are in the application JAR
-				final FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
-				pathToFolders = new Path[]{fileSystem.getPath('/' + path)};
+				try (final FileSystem fileSystem = FileSystems.newFileSystem(uri,
+						Collections.<String, Object>emptyMap());) {
+					pathToFolders = new Path[]{fileSystem.getPath('/' + path)};
+
+					for (final Path pathToFolder : pathToFolders) {
+						classes.addAll(findClasses(pathToFolder, packageName));
+					}
+				}
 			} else {
 				// we are in the IDE
 				final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -77,11 +83,10 @@ public final class Contribs {
 				for (int i = 0; i < pathToFolders.length; i++) {
 					pathToFolders[i] = Paths.get(resources.get(i).toURI());
 				}
+				for (final Path pathToFolder : pathToFolders) {
+					classes.addAll(findClasses(pathToFolder, packageName));
+				}
 			}
-			for (final Path pathToFolder : pathToFolders) {
-				classes.addAll(findClasses(pathToFolder, packageName));
-			}
-
 		} catch (final URISyntaxException e) {
 			throw new RuntimeException("This really should not have happend o_O", e);
 		}
@@ -105,7 +110,7 @@ public final class Contribs {
 		return classes;
 	}
 
-	private Contribs() {
+	private Contributions() {
 		// hide me
 	}
 }

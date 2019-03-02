@@ -1,11 +1,14 @@
-package de.slothsoft.blaupause;
+package ${package};
 
 import java.awt.Point;
 import java.util.Random;
+import de.slothsoft.challenger.core.Contributions;
+import ${package}.contrib.Example${contribName};
 
 /**
  * A generator for {@link Map}.
  * 
+ * @author Stef Schulz
  * @since 1.0.0
  */
 
@@ -19,8 +22,9 @@ public class MapGenerator {
 		Map map = new Map(this.width, this.height);
 
 		int index = 0;
-		for (Contrib contrib : Contribs.fetchAllImplementations()) {
-			map.tiles[7][index++] = new ContribTile(contrib);
+		for (${contribName} contrib : Contributions.fetchImplementations(Example${contribName}.class.getPackage(), 
+				${contribName}.class)) {
+			map.tiles[7][index++] = new ${contribName}Tile(contrib);
 		}
 		return map;
 	}

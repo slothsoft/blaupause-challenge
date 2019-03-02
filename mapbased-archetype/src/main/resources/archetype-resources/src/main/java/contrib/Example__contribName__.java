@@ -1,8 +1,8 @@
-package de.slothsoft.blaupause.contrib;
+package ${package}.contrib;
 
 import java.util.Random;
 
-public class ExampleContrib extends AbstractContrib {
+public class Example${contribName} extends Abstract${contribName} {
 
 	private final Random rnd = new Random();
 	private final Action[] actions = Action.values();
