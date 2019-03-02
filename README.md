@@ -1,5 +1,7 @@
 # Challenger Framework
 
+[![Build Status](https://travis-ci.org/slothsoft/framework-challenger.svg?branch=master)](https://travis-ci.org/slothsoft/framework-challenger) [![Maven Central](https://img.shields.io/maven-central/v/de.slothsoft.challenger/core.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22de.slothsoft.challenger%22%20AND%20a:%22core%22)
+
 - **Author:** [Stef Schulz](mailto:s.schulz@slothsoft.de)
 - **Repository:** <https://github.com/slothsoft/framework-challenger>
 - **Open Issues:** <https://github.com/slothsoft/framework-challenger/issues>
