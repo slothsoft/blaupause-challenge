@@ -43,7 +43,7 @@ mvn archetype:generate -DarchetypeGroupId=de.slothsoft.challenger -DarchetypeArt
 
 | Version       | Changes       |
 | ------------- | ------------- |
-| [1.0.0](https://github.com/slothsoft/blaupause-challenge/milestone/1?closed=1) | first release|
+| [1.0.0](https://github.com/slothsoft/framework-challenger/milestone/1?closed=1) | first release|
    
    
 
@@ -51,6 +51,17 @@ mvn archetype:generate -DarchetypeGroupId=de.slothsoft.challenger -DarchetypeArt
 
 - **core** - basic functionality for finding contributions dynamically
 - **mapbased-archetype** - Maven archetype for map based challenges like the [tribes challenge](https://github.com/slothsoft/challenge-tribes)
+
+
+### Map Based Archetype
+
+The resulting project looks something like that:
+
+![Screenshot](https://raw.githubusercontent.com/slothsoft/framework-challenger/master/readme/mapbased.png)
+
+It might be ugly, but you can do fun stuff with it:
+
+- [tribes challenge](https://github.com/slothsoft/challenge-tribes)
 
 
 ## License
